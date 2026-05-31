@@ -197,17 +197,22 @@ def create_figure(line):
     return obj
 
 figures = []
-with open("input01.txt", "r") as file:
-    for line in file:
-        line = line.strip()
-        if not line:
-            continue
-        fig = create_figure(line)
-        if fig is not None:
-            figures.append(fig)
-if not figures:
-    print("No valid figures found")
-else:
-    max_figure = max(figures, key=lambda f: f.volume())
-    print("Figure:", type(max_figure).__name__)
-    print("Measure:", max_figure.volume())
+
+files = ["input01.txt", "input02.txt", "input03.txt"]
+for file_name in files:
+    figures = []
+    with open(file_name, "r") as file:
+        for line in file:
+            line = line.strip()
+            if not line:
+                continue
+            fig = create_figure(line)
+            if fig is not None:
+                figures.append(fig)
+    if not figures:
+        print("У файлі", file_name, "немає коректно заданих фігур")
+    else:
+        max_figure = max(figures, key=lambda f: f.volume())
+        print("\nФайл:", file_name)
+        print("Фігура:", type(max_figure).__name__)
+        print("Виміри:", max_figure.volume())
